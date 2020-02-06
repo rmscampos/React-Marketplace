@@ -9,7 +9,9 @@ const expressValidator = require('express-validator');
 require('dotenv').config();
 
 // import routes
-const authRoutes = require('./routes/auth')
+const authRoutes = require('./routes/auth');
+const userRoutes = require('./routes/user');
+
 
 // connect to DB
 mongoose.connect(process.env.MONGO_URI, {
@@ -25,7 +27,7 @@ db.once('connected', () => {
 });
 
 
-// middlewares
+// middleware
 app.use(morgan('dev'));
 app.use(bodyParser.json());
 app.use(cookieParser());
@@ -33,6 +35,7 @@ app.use(expressValidator());
 
 // routes middleware
 app.use('/api', authRoutes);
+app.use('/api', userRoutes);
 
 const port = process.env.PORT || 3001;
 
