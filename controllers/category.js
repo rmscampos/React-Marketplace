@@ -68,6 +68,3 @@ exports.list = (req, res) => {
     });
 };
 
-/**
- * sell / arrival
- */
