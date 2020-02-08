@@ -43,6 +43,9 @@ app.use('/api', userRoutes);
 app.use('/api', categoryRoutes);
 app.use('/api', productRoutes);
 
+app.use('/', express.static('public/public'));
+
+
 const port = process.env.PORT || 3001;
 
 app.listen(port, () => {
