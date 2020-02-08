@@ -43,8 +43,18 @@ app.use('/api', userRoutes);
 app.use('/api', categoryRoutes);
 app.use('/api', productRoutes);
 
-app.use('/', express.static('public/public'));
+// app.use('/', express.static('public/public'));
 
+// Configure both serve-favicon & static middlewares
+// to serve from the production 'build' folder
+app.use(favicon(path.join(__dirname, 'build', 'favicon.ico')));
+app.use(express.static(path.join(__dirname, 'build')));
+
+// The following "catch all" route (note the *)is necessary
+// for a SPA's client-side routing to properly work
+app.get('/*', function(req, res) {
+  res.sendFile(path.join(__dirname, 'build', 'index.html'));
+});
 
 const port = process.env.PORT || 3001;
 
