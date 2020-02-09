@@ -3,7 +3,7 @@ import Layout from "../core/Layout";
 import { isAuthenticated } from "../auth";
 import { Link } from "react-router-dom";
 import { getPurchaseHistory } from "./apiUser";
-import moment from "moment";
+// import moment from "moment";
 
 const Dashboard = () => {
     const [history, setHistory] = useState([]);
