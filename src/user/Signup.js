@@ -72,7 +72,7 @@ const Signup = () => {
     return (
         <Layout 
             title='Sign Up' 
-            description='Sign up for MERN E-commerce App'
+            description='to enter Marketplace'
             className='container col-md-8 offset-md-2'
         >
             {showSuccess()}
