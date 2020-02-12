@@ -1,7 +1,7 @@
 import React, { useState, useEffect} from "react";
 import Layout from "../core/Layout";
 import { isAuthenticated } from "../auth";
-import { Link } from "react-router-dom";
+// import { Link } from "react-router-dom";
 import { createProduct } from './apiAdmin';
 
 
@@ -29,30 +29,47 @@ const AddProduct = () => {
         description,
         price,
         categories,
-        category,
-        shipping,
+        // category,
+        // shipping,
         quantity,
-        loading,
-        error,
-        createdProduct,
-        redirectToProfile,
+        // loading,
+        // error,
+        // createdProduct,
+        // redirectToProfile,
         formData
     } = values;
 
     useEffect(() => {
-        setValues({...values, formData: new FormData()})
-    }), []);
+        setValues({...values, formData: new FormData() });
+    }, []);
 
-    const handleChange = name => {
+    const handleChange = name => event => {
         const value = name === 'photo' ? event.target.files[0] : event.target.value
         formData.set(name, value);
         setValues({...values, [name]: value });
     };
 
-    const clickSubmit = (event) => {
-        event.preventDefault()
-        setValues({...values, error})
-    }
+    const clickSubmit = event => {
+        event.preventDefault();
+        setValues({ ...values, error: '', loading: true });
+
+        createProduct(user._id, token, formData).then(data => {
+            if (data.error) {
+                setValues({ ...values, error: data.error });
+            } else {
+                setValues({
+                    ...values,
+                    name: '',
+                    description: '',
+                    photo: '',
+                    price: '',
+                    quantity: '',
+                    loading: false,
+                    createdProduct: data.name
+                });
+            }
+        });
+    };
 
     const newPostForm = () => {
         return (
